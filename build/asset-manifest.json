@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/GQ/static/css/main.6ba16246.chunk.css",
+    "main.js": "/GQ/static/js/main.92e39755.chunk.js",
+    "main.js.map": "/GQ/static/js/main.92e39755.chunk.js.map",
+    "runtime~main.js": "/GQ/static/js/runtime~main.228948dd.js",
+    "runtime~main.js.map": "/GQ/static/js/runtime~main.228948dd.js.map",
+    "static/js/2.bbcd3f81.chunk.js": "/GQ/static/js/2.bbcd3f81.chunk.js",
+    "static/js/2.bbcd3f81.chunk.js.map": "/GQ/static/js/2.bbcd3f81.chunk.js.map",
+    "index.html": "/GQ/index.html",
+    "precache-manifest.6f39b5bfbad1bea3070fc66393595657.js": "/GQ/precache-manifest.6f39b5bfbad1bea3070fc66393595657.js",
+    "service-worker.js": "/GQ/service-worker.js",
+    "static/css/main.6ba16246.chunk.css.map": "/GQ/static/css/main.6ba16246.chunk.css.map",
+    "static/media/background.jpg": "/GQ/static/media/background.dd4b7090.jpg",
+    "static/media/logo.png": "/GQ/static/media/logo.0e44b478.png"
+  }
+}

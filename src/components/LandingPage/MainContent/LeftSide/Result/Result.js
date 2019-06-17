@@ -10,7 +10,7 @@ const Result = (props) => {
   return (
     <div className="Result">
       <h2>Wynik</h2>
-
+      <h3 id="powiat">Powiat ...</h3>
       <Map />
       <LinkButton click={props.backClick} id={2}><i className="fas fa-long-arrow-alt-left"></i> Powrót</LinkButton>
     </div>
