@@ -1,0 +1,26 @@
+.MainContent {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  height: auto;
+  background-color: white;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.MainContent .wrapper {
+  width: 100%;
+  margin: 0 auto;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.MainContent .mask {
+  position: absolute;
+  height: 100%;
+  width: 65%;
+  background-color: rgba(0, 0, 0, 0.85);
+  clip-path: polygon(0 0, 100% 0, 70% 100%, 0 100%);
+}

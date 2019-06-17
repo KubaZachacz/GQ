@@ -1,0 +1,7 @@
+.LeftSide {
+  height: auto;
+  width: 65%;
+  position: relative;
+  overflow: hidden;
+  clip-path: polygon(0 0, 100% 0, 70% 100%, 0 100%);
+}

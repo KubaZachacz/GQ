@@ -1,0 +1,21 @@
+.MainInfo {
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+//   border: 1px solid red;
+
+  h1 {
+    text-align: left;
+    color: white;
+    font-size: 7.2vmin;
+  }
+  a {
+    color: white;
+    font-size: 1.3em;
+    &:hover {
+      color: rgb(179, 179, 179);
+    }
+  }
+}
