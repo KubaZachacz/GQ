@@ -1,14 +1,3 @@
-.MainContent {
-  position: relative;
-  width: 100%;
-  min-height: 100vh;
-  height: auto;
-  background-color: white;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
 .MainContent .wrapper {
   width: 100%;
   margin: 0 auto;
