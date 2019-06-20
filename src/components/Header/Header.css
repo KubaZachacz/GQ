@@ -1,10 +1,18 @@
+.Header {
+  position: absolute;
+  width: 100%;
+  height: auto;
+  background-color: green;
+  overflow: hidden;
+}
+
 .Header nav {
   width: 100%;
-  position: absolute;
+  position: relative;
   z-index: 1;
   display: flex;
-  justify-content: flex-end;
-  align-items: center;
+  justify-content: space-between;
+  align-items: flex-start;
   margin-top: 20px;
 }
 
@@ -12,10 +20,12 @@
   margin-right: 20px;
 }
 
+.Header .nav-btns {
+  display: flex;
+}
+
 .Header .logo {
-  position: absolute;
-  left: 2.5%;
-  top: 2%;
+  margin-left: 2.5%;
   min-width: 110px;
   z-index: 1;
   transition: width 1s, height 1s;

@@ -6,4 +6,26 @@
   height: 100%;
   padding: 0 5%;
   transition: left 1s;
+  overflow: auto;
+  /* Track */
+  /* Handle */
+  /* Handle on hover */
+}
+
+.Slide::-webkit-scrollbar {
+  width: 10px;
+}
+
+.Slide::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.Slide::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+.Slide::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }

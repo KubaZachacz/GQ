@@ -1,9 +1,6 @@
 .About {
-  position: absolute;
-  top: 55%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   width: 90%;
+  margin: 25vh auto 0 auto;
 }
 
 .About h2 {

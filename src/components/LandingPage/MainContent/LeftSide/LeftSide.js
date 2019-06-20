@@ -21,13 +21,13 @@ const LeftSide = (props) => {
 
   return (
     <div className="LeftSide">
-      <Slide style={mainStyle}>
+      <Slide selected={props.actualSite===2?'selected':''} style={mainStyle}>
         <MainInfo aboutClick={props.linkClick}/>
       </Slide>
-      <Slide style={aboutStyle}>
+      <Slide selected={props.actualSite===3?'selected':''} style={aboutStyle}>
         <About backClick={props.linkClick}/>
       </Slide>
-      <Slide style={resultStyle}>
+      <Slide selected={props.actualSite===1?'selected':''} style={resultStyle}>
         <Result backClick={props.linkClick}/>
       </Slide>
     </div>

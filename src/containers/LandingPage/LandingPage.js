@@ -30,20 +30,28 @@ class LandingPage extends Component {
         //     this.setState({scriptLoaded:true})
         // }
         this.props.textResize();
+        this.props.pageCallback(this.state.actualSite>1?0:1);
+
     }
 
     componentDidUpdate(prevProps) {
+        
         // will be true
-        const locationChanged = this.props.location !== prevProps.location;
-        console.log(locationChanged);
+        // const locationChanged = this.props.location !== prevProps.location;
+
+        // this.fixSideSize();
         // INCORRECT, will *always* be false because history is mutable.
     }
+
+
 
     linkClickHandler = (page) => {
         this.setState({
             actualSite: page,
         })
-        this.props.passSite(page)
+        // this.props.pageCallback(page)
+        console.log(page)
+        this.props.pageCallback(page>1?0:1);
     }
 
     geocodeClickHandler = () => {
@@ -86,7 +94,7 @@ class LandingPage extends Component {
         return (
             <div className="LandingPage">
                 <MainContent>
-                    <LeftSide actualSite={this.state.actualSite} linkClick={this.linkClickHandler} />
+                    <LeftSide id="LeftSide" actualSite={this.state.actualSite} linkClick={this.linkClickHandler} />
                     <RightSide geoClick={this.geocodeClickHandler} searchClick={this.shearchClickHandler} />
                 </MainContent>
             </div>

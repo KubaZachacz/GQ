@@ -5,14 +5,15 @@ import loadScript from './components/Map/loadScript'
 
 import LandingPage from './containers/LandingPage/LandingPage'
 import LoginPage from './containers/LoginPage/LoginPage'
+import PanelPage from './containers/PanelPage/PanelPage'
 
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { BrowserRouter as Router, HashRouter, Switch, Route } from 'react-router-dom'
 
 import './App.css';
 
 class App extends Component {
   state = {
-    logoSize: 2,
+    actualPage: 1,
     fontSizeText: null,
     isLogged: false,
     isLogging: false,
@@ -20,11 +21,11 @@ class App extends Component {
   }
 
   componentDidMount = () => {
-    console.log(this.state.scriptLoaded)
     if (!this.state.scriptLoaded) {
       loadScript("https://maps.googleapis.com/maps/api/js?key=AIzaSyCyfGjRlQjt9v6WHdQDNh7vgS7l5pntwb8&libraries=places")
       this.setState({ scriptLoaded: true })
     }
+    // this.fixSideSize();
   }
 
   componentDidUpdate = () => {
@@ -32,11 +33,23 @@ class App extends Component {
       // this.textResizeHandler(this.state.fontSizeText);
       this.textResizeFn(this.state.fontSizeText);
     }
+    // this.fixSideSize();
   }
 
-  changeSiteCallback = (site) => {
+  fixSideSize = () => {
+    const slide = document.querySelector('.selected');
+    const leftSide = document.querySelector('.LeftSide');
+    // const searchBar = document.querySelector('.action-btns');
+
+    if (leftSide) leftSide.style.height = slide.clientHeight + "px";
+    // if(searchBar) searchBar.style.top = `${(window.innerHeight - searchBar.clientHeight)/2}px`;
+  }
+
+
+  pageCallback = (site) => {
+    console.log(site);
     this.setState({
-      logoSize: site
+      actualPage: site
     })
   }
 
@@ -96,17 +109,18 @@ class App extends Component {
     // let visibleArea = <LandingPage passSite={this.changeSiteCallback} />
     // if (this.state.isLogging) visibleArea = <LoginPage />
     return (
-      <Router >
+      <HashRouter basename='/'>
         <div className="App">
-          <Header logoSize={this.state.logoSize} resizeClick={this.textResizeClickHandler} loginClick={this.loginClickHandler} />
+          <Header actualPage={this.state.actualPage} resizeClick={this.textResizeClickHandler} loginClick={this.loginClickHandler} />
           {/* {visibleArea} */}
           <Switch>
-            <Route path="/" exact render={(props) => <LandingPage {...props} passSite={this.changeSiteCallback} textResize={this.textResizeTrigger}/>} />
+            <Route path="/" exact render={(props) => <LandingPage {...props} pageCallback={this.pageCallback} textResize={this.textResizeTrigger} />} />
             {/* <Route path="/" exact component={LandingPage} /> */}
-            <Route path="/login" render={(props) => <LoginPage {...props} textResize={this.textResizeTrigger}/>} />
+            <Route path="/login" render={(props) => <LoginPage {...props} pageCallback={this.pageCallback} textResize={this.textResizeTrigger} />} />
+            <Route path="/panel" render={(props) => <PanelPage {...props} pageCallback={this.pageCallback} textResize={this.textResizeTrigger} />} />
           </Switch>
         </div>
-      </Router>
+      </HashRouter>
     );
   }
 }

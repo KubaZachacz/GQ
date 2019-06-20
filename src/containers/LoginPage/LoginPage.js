@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
-import Button from '../../components/UI/Button/Button'
-
+// import Button from '../../components/UI/Button/Button'
+import {Link} from 'react-router-dom'
 import Background from '../../hoc/Background/Background'
 
 import './LoginPage.scss';
@@ -11,6 +11,7 @@ class LoginPage extends Component {
   componentDidMount = () => {
 
     this.props.textResize();
+    this.props.pageCallback(2);
 }
 
   render() {
@@ -28,8 +29,8 @@ class LoginPage extends Component {
               <label>Hasło</label>
               <input type="text" />
               <div className="inlines">
-                <button onClick={e=>e.preventDefault()}>Zarejestruj</button>
-                <button onClick={e=>e.preventDefault()}>Zaloguj sie</button>
+                <button disabled onClick={e=>e.preventDefault()}>Zarejestruj</button>
+                <button onClick={e=>e.preventDefault()}><Link to="/panel">Zaloguj sie</Link></button>
               </div>
             </form>
           </div>

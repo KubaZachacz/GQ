@@ -1,9 +1,31 @@
 .Slide {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 70%;
-    height: 100%;
-    padding: 0 5%;
-    transition: left 1s;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 70%;
+  height: 100%;
+  padding: 0 5%;
+  transition: left 1s;
+  overflow: auto;
+
+  &::-webkit-scrollbar {
+    width: 10px;
   }
+  
+  /* Track */
+  &::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+    border-radius: 10px;
+  }
+   
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    background: #888; 
+    border-radius: 10px;
+  }
+  
+  /* Handle on hover */
+  &::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
+}
