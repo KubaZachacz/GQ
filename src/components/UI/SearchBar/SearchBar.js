@@ -4,11 +4,19 @@ import './SearchBar.scss';
 
 const SearchBar = (props) => {
 
+  const inputEnterHandler = (event) => {
+    if (event.keyCode === 13) {
+      // event.preventDefault();
+      props.searchClick(1)
+    }
+  }
+
   return (
+
     <div className="SearchBar" action="index.html" method="post">
-      <input type="text" name="search" placeholder="Wyszukaj adres" id="search-bar"/>
-      <button onClick={()=>{props.geoClick()}} className="localization" title="Znajdź adres"><i className="far fa-dot-circle"></i></button>
-      <button onClick={()=>{props.searchClick(1)}} className="search-icon" title="Wyszukaj"><i className="fas fa-search"></i></button>
+        <input onKeyUp={(e) => inputEnterHandler(e)} type="text" name="search" placeholder="Wyszukaj adres" id="search-bar" />
+        <button onClick={() => { props.geoClick() }} className="localization" title="Znajdź adres"><i className="far fa-dot-circle"></i></button>
+        <button onClick={() => { props.searchClick(1) }} className="search-icon" title="Wyszukaj"><i className="fas fa-search"></i></button>
     </div>
   )
 };

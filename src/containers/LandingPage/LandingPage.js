@@ -4,11 +4,14 @@ import MainContent from '../../components/LandingPage/MainContent/MainContent'
 import RightSide from '../../components/LandingPage/MainContent/RightSide/RightSide'
 import LeftSide from '../../components/LandingPage/MainContent/LeftSide/LeftSide'
 
+import axios from 'axios'
+
 import { createMap, showAddress, loadGeoJson, findAddress } from '../../components/Map/MapFunctions'
 
 import powiaty from "../../assets/powiaty.json";
 // import googleLogo from "../../assets/google.json";
 import './LandingPage.scss';
+import { throwStatement } from '@babel/types';
 
 class LandingPage extends Component {
     state = {
@@ -17,7 +20,7 @@ class LandingPage extends Component {
             lat: null,
             lng: null
         },
-
+        result: null
     }
 
     map = null;
@@ -30,17 +33,18 @@ class LandingPage extends Component {
         //     this.setState({scriptLoaded:true})
         // }
         this.props.textResize();
-        this.props.pageCallback(this.state.actualSite>1?0:1);
+        this.props.pageCallback(this.state.actualSite > 1 ? 0 : 1);
 
     }
 
     componentDidUpdate(prevProps) {
-        
+
         // will be true
         // const locationChanged = this.props.location !== prevProps.location;
 
         // this.fixSideSize();
         // INCORRECT, will *always* be false because history is mutable.
+
     }
 
 
@@ -48,10 +52,14 @@ class LandingPage extends Component {
     linkClickHandler = (page) => {
         this.setState({
             actualSite: page,
+        }, ()=>{
+            if(page === 1) {
+                setTimeout(this.resultOpenedHandler, 800);
+            }
         })
         // this.props.pageCallback(page)
-        console.log(page)
-        this.props.pageCallback(page>1?0:1);
+        this.props.pageCallback(page > 1 ? 0 : 1);
+
     }
 
     geocodeClickHandler = () => {
@@ -62,30 +70,39 @@ class LandingPage extends Component {
         }
     }
 
-    shearchClickHandler = async (page) => {
+    resultOpenedHandler = async (page) => {
+
         const fraze = document.getElementById("search-bar").value;
-        // const map = showLocal(fraze);
         const map = createMap();
-        const latLng = await showAddress(map, fraze);
         this.map = map;
+        const latLng = await showAddress(map, fraze);
+
         this.latLng = latLng;
-        this.linkClickHandler(page);
         const geoJson = await loadGeoJson(map, powiaty);
+
         window.google.maps.event.addListenerOnce(map, 'idle', () => {
-            setTimeout(this.findPowiat, 500)
+            setTimeout(() => { this.findPowiat() }, 1200);
         });
     }
 
-    findPowiat = () => {
+
+    findPowiat = (latLnag) => {
         const google = window.google;
+        let powiat = '';
         this.map.data.forEach((feature) => {
             const testPoly = new google.maps.Polygon({ paths: feature.getGeometry().getAt(0).getAt(0).getArray() });
             if (google.maps.geometry.poly.containsLocation(this.latLng, testPoly)) {
-                // console.log(feature.getProperty('jpt_nazwa_'));
-                // alert('powiat '+feature.getProperty('jpt_nazwa_'));
-                document.getElementById("powiat").innerText = 'Powiat ' + feature.getProperty('jpt_nazwa_');
+                powiat = feature.getProperty('jpt_nazwa_');
             }
         })
+        // document.getElementById("powiat").innerText = 'Powiat ' + powiat;
+        axios.get(`http://server184749.nazwa.pl:9007/getdata/powiat/?nazwa=${powiat}&lat=${this.latLng.lat()}&lon=${this.latLng.lng()}`)
+            .then(res => {
+                this.setState({
+                    result: res.data.data
+                })
+
+            })
     }
 
 
@@ -94,8 +111,8 @@ class LandingPage extends Component {
         return (
             <div className="LandingPage">
                 <MainContent>
-                    <LeftSide id="LeftSide" actualSite={this.state.actualSite} linkClick={this.linkClickHandler} />
-                    <RightSide geoClick={this.geocodeClickHandler} searchClick={this.shearchClickHandler} />
+                    <LeftSide id="LeftSide" actualSite={this.state.actualSite} linkClick={this.linkClickHandler} resultOpened={this.resultOpenedHandler} resultData={this.state.result} />
+                    <RightSide geoClick={this.geocodeClickHandler} searchClick={this.linkClickHandler} />
                 </MainContent>
             </div>
 

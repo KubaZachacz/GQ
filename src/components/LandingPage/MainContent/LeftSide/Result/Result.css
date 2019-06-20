@@ -1,6 +1,6 @@
 .Result {
   width: 95%;
-  margin: 15vh auto 0 auto;
+  margin: 16vh auto 0 auto;
 }
 
 .Result h2 {
@@ -12,7 +12,7 @@
 .Result h3 {
   color: white;
   font-size: 1.4em;
-  margin-bottom: 340px;
+  margin-bottom: 20px;
 }
 
 .Result p {
@@ -20,4 +20,30 @@
   font-size: 1.3em;
   margin: 2px 0;
   line-height: 1.3;
+}
+
+.Result .result-set {
+  min-height: 200px;
+}
+
+.Result .result-set .single-result {
+  margin: 5px 0;
+}
+
+.Result .result-set i {
+  font-size: 1.5em;
+}
+
+.Result .result-set span {
+  font-weight: 700;
+  margin-left: 5px;
+}
+
+.Result a {
+  display: inline-block;
+  width: 90%;
+  text-align: center;
+  color: white;
+  font-size: 1.6em;
+  margin-top: 15px;
 }

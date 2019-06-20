@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 
 import Logo from '../../assets/LogoQG.png'
 
-import BackgroundImg from '../../assets/background.jpg'
+
 
 import './Header.scss';
 
@@ -13,20 +13,19 @@ const Header = (props) => {
 
   let navStyle = {}
 
+  let loginButton = <div className="login"><Link to='/login'><Button click={props.loginClick}>Zaloguj się</Button></Link></div>
+
   if (props.actualPage > 2) {
     navStyle = {
-      //   backgroundImage: `url(${BackgroundImg})`,
-      //   backgroundPosition: 'center',
-      //   backgroundRepeat: 'no-repeat',
-      //   backgroundSize: 'cover'
-      // backgroundColor: 'black'
+      // position: 'static',
+      backgroundColor: 'rgba(0,0,0,0.35)'
     }
-    console.log(navStyle)
+    loginButton = <div className="login"><Link to='/'><Button click={props.loginClick}>Wyloguj się</Button></Link></div>
   }
 
-  let logoWidth = "15%"
-  if (props.actualPage > 0) {
-    logoWidth = "7%"
+  let logoWidth = "120px"
+  if (props.actualPage === 0) {
+    logoWidth = "35vmin"
   }
   const logoStyle = {
     width: logoWidth
@@ -49,7 +48,7 @@ const Header = (props) => {
             <Button><i className="fas fa-adjust"></i></Button>
             <Button><i className="fas fa-adjust contrast-"></i></Button>
           </div>
-          <div className="login"><Link to='/login'><Button click={props.loginClick}>Zaloguj się</Button></Link></div>
+          {loginButton}
         </div>
       </nav>
     </header>

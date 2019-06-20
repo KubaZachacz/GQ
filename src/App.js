@@ -47,7 +47,6 @@ class App extends Component {
 
 
   pageCallback = (site) => {
-    console.log(site);
     this.setState({
       actualPage: site
     })

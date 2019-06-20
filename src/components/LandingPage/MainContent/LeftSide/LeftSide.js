@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import Slide from './Slide/Slide'
 import MainInfo from './MainInfo/MainInfo'
@@ -9,26 +9,36 @@ import './LeftSide.scss';
 
 const LeftSide = (props) => {
 
+  const [loaded, setLoaded] = useState(0);
+
+  useEffect(() => {
+    if (props.actualSite === 1) {
+      // setTimeout(props.resultOpened, 800);
+    }
+  });
+
   let resultStyle = {
-    left: `${100-props.actualSite*100}%`
+    left: `${100 - props.actualSite * 100}%`
   }
   let mainStyle = {
-    left: `${200-props.actualSite*100}%`
+    left: `${200 - props.actualSite * 100}%`
   }
   let aboutStyle = {
-    left: `${300-props.actualSite*100}%`
+    left: `${300 - props.actualSite * 100}%`
   }
+
+
 
   return (
     <div className="LeftSide">
-      <Slide selected={props.actualSite===2?'selected':''} style={mainStyle}>
-        <MainInfo aboutClick={props.linkClick}/>
+      <Slide selected={props.actualSite === 2 ? 'selected' : ''} style={mainStyle}>
+        <MainInfo aboutClick={props.linkClick} />
       </Slide>
-      <Slide selected={props.actualSite===3?'selected':''} style={aboutStyle}>
-        <About backClick={props.linkClick}/>
+      <Slide selected={props.actualSite === 3 ? 'selected' : ''} style={aboutStyle}>
+        <About backClick={props.linkClick} />
       </Slide>
-      <Slide selected={props.actualSite===1?'selected':''} style={resultStyle}>
-        <Result backClick={props.linkClick}/>
+      <Slide selected={props.actualSite === 1 ? 'selected' : ''} style={resultStyle}>
+        <Result resultData={props.resultData} backClick={props.linkClick} />
       </Slide>
     </div>
   )

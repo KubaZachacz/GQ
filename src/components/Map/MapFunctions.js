@@ -4,8 +4,9 @@ export const createMap = () => {
   const google = window.google;
 
   const map = new google.maps.Map(document.getElementById("map"), {
-    center: { lat: -34.397, lng: 150.644 },
-    zoom: 10,
+    center: { lat: 52.229676, lng: 21.012229 },
+    zoom: 5,
+    disableDefaultUI: true
   });
 
   return map
@@ -20,6 +21,7 @@ export const showAddress = (map, input) => {
       if (status === 'OK') {
         latLng = results[0].geometry.location;
         map.setCenter(latLng);
+        map.setZoom(10);
         var marker = new google.maps.Marker({
           map: map,
           position: latLng

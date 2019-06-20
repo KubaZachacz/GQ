@@ -7,13 +7,21 @@
   padding: 0 5%;
   transition: left 1s;
   overflow: auto;
+  direction: rtl;
   /* Track */
   /* Handle */
   /* Handle on hover */
 }
 
+.Slide .slide-content {
+  direction: ltr;
+}
+
 .Slide::-webkit-scrollbar {
   width: 10px;
+  position: absolute;
+  left: 0;
+  top: 0;
 }
 
 .Slide::-webkit-scrollbar-track {

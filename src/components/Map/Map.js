@@ -5,8 +5,8 @@ import './Map.scss';
 const Map = (props) => {
 
   const mapStyle = {
-    width: "70%",
-    height: "240px"
+    width: "90%",
+    height: "140px"
   }
 
   return (

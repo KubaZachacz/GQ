@@ -4,7 +4,6 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import Background from '../../hoc/Background/Background'
 
-
 import './PanelPage.scss';
 
 class PanelPage extends Component {
@@ -17,9 +16,13 @@ class PanelPage extends Component {
 
     render() {
         return (
-            <div className="PanelPage">
-                ELO KURWY
-            </div>
+            <Background>
+                <div className="PanelPage">
+                    <div className="PanelContent">
+                        Siema HENIU
+                    </div>
+                </div>
+            </Background>
         )
     }
 
