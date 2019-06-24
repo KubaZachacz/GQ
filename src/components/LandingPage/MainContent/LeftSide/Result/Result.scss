@@ -1,6 +1,6 @@
 .Result {
   width: 95%;
-  margin: 16vh auto 0 auto;
+  margin: 13vh auto 0 auto;
 
   h2 {
     text-align: left;
@@ -20,8 +20,8 @@
   }
 
   .result-set {
-    min-height: 200px;
-    .single-result{
+    min-height: 160px;
+    .single-result {
       margin: 5px 0;
     }
     i {
@@ -34,11 +34,15 @@
   }
   a {
     display: inline-block;
-    width: 90%;
+    width: 100%;
+    margin: 0 auto;
     text-align: center;
     color: white;
-    font-size: 1.6em;
-    margin-top: 15px;
+    font-size: 1.5em;
+    margin-top: 20px;
     // border: 1px solid red;
+  }
+  .star {
+    font-size: 0.8em;
   }
 }

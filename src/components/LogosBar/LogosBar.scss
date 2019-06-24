@@ -1,0 +1,20 @@
+.LogosBar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+    height: auto;
+    background-color: white;
+    padding: 5px 0;
+    img {
+        // height: 100%;
+        margin: 0 20px;
+        width: auto;
+        transition: all .4s ease-in-out;
+        cursor: zoom-in;
+        &:hover {
+            transform: scale(1.8);
+        }
+    }
+}

@@ -4,9 +4,11 @@ import './Button.scss';
 
 const Button = (props) => {
 
+  const addClass = props.className?props.className:'';
+
 return (
-  <button className="Button" style={props.style} onClick={()=>{if(props.click)props.click(props.param)}}>
-    {props.children}
+  <button className={`Button ${addClass}`} style={props.style} onClick={()=>{if(props.click)props.click(props.param)}}>
+    <div className="btnContent">{props.children}</div>
   </button>
 )};
 

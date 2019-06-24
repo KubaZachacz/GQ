@@ -6,21 +6,18 @@ import LeftSide from '../../components/LandingPage/MainContent/LeftSide/LeftSide
 
 import axios from 'axios'
 
-import { createMap, showAddress, loadGeoJson, findAddress } from '../../components/Map/MapFunctions'
+import { createMap, addMarker, clearMarkers, showAddress, loadGeoJson, findAddress } from '../../components/Map/MapFunctions'
 
 import powiaty from "../../assets/powiaty.json";
 // import googleLogo from "../../assets/google.json";
 import './LandingPage.scss';
-import { throwStatement } from '@babel/types';
 
 class LandingPage extends Component {
     state = {
         actualSite: 2,
-        location: {
-            lat: null,
-            lng: null
-        },
-        result: null
+        result: null,
+        searchFraze: '',
+        marker: null
     }
 
     map = null;
@@ -33,7 +30,10 @@ class LandingPage extends Component {
         //     this.setState({scriptLoaded:true})
         // }
         this.props.textResize();
+        this.props.contrastChange();
         this.props.pageCallback(this.state.actualSite > 1 ? 0 : 1);
+        this.map = createMap();
+        const geoJson = loadGeoJson(this.map, powiaty);
 
     }
 
@@ -52,59 +52,70 @@ class LandingPage extends Component {
     linkClickHandler = (page) => {
         this.setState({
             actualSite: page,
-        }, ()=>{
-            if(page === 1) {
-                setTimeout(this.resultOpenedHandler, 800);
-            }
         })
         // this.props.pageCallback(page)
         this.props.pageCallback(page > 1 ? 0 : 1);
 
     }
 
-    geocodeClickHandler = () => {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition((position) => { findAddress(position.coords.latitude, position.coords.longitude) });
-        } else {
-            console.log("Geolocation is not supported by this browser.");
-        }
+    geocodeClickHandler = async () => {
+        const fraze = await findAddress();
+        this.setState({
+            searchFraze: fraze
+        })
     }
 
     resultOpenedHandler = async (page) => {
 
-        const fraze = document.getElementById("search-bar").value;
-        const map = createMap();
-        this.map = map;
+        const fraze = this.state.searchFraze;
+        // const map = createMap();
+        const map = this.map;
         const latLng = await showAddress(map, fraze);
+        if (latLng) {
+            clearMarkers(this.state.marker);
+            const marker = addMarker(map, latLng)
+            this.latLng = latLng;
+            this.setState({
+                marker: marker
+            })
+            this.findPowiat()
+            this.linkClickHandler(1)
+        }
 
-        this.latLng = latLng;
-        const geoJson = await loadGeoJson(map, powiaty);
-
-        window.google.maps.event.addListenerOnce(map, 'idle', () => {
-            setTimeout(() => { this.findPowiat() }, 1200);
-        });
     }
-
 
     findPowiat = (latLnag) => {
         const google = window.google;
         let powiat = '';
+        let mapFeature;
         this.map.data.forEach((feature) => {
+            feature.setProperty('isSelected', false);
             const testPoly = new google.maps.Polygon({ paths: feature.getGeometry().getAt(0).getAt(0).getArray() });
             if (google.maps.geometry.poly.containsLocation(this.latLng, testPoly)) {
                 powiat = feature.getProperty('jpt_nazwa_');
+                // this.map.data.revertStyle();
+                // this.map.data.setStyle(feature, {fillColor: '#EF0000'})
+                mapFeature = feature;
             }
         })
+        mapFeature.setProperty('isSelected', true);
+        const lat = this.latLng.lat().toFixed(3);
+        const lon = this.latLng.lng().toFixed(3);
         // document.getElementById("powiat").innerText = 'Powiat ' + powiat;
-        axios.get(`http://server184749.nazwa.pl:9007/getdata/powiat/?nazwa=${powiat}&lat=${this.latLng.lat()}&lon=${this.latLng.lng()}`)
+
+        axios.get(`http://server184749.nazwa.pl:9007/getdata/landing?nazwa=${powiat}&lat=${lat}&lon=${lon}`)
             .then(res => {
                 this.setState({
-                    result: res.data.data
+                    result: res.data.dane
                 })
-
             })
     }
 
+    inputTypeHandler = (e) => {
+        this.setState({
+            searchFraze: e.target.value
+        })
+    }
 
     render() {
 
@@ -112,7 +123,7 @@ class LandingPage extends Component {
             <div className="LandingPage">
                 <MainContent>
                     <LeftSide id="LeftSide" actualSite={this.state.actualSite} linkClick={this.linkClickHandler} resultOpened={this.resultOpenedHandler} resultData={this.state.result} />
-                    <RightSide geoClick={this.geocodeClickHandler} searchClick={this.linkClickHandler} />
+                    <RightSide fraze={this.state.searchFraze} typeFraze={this.inputTypeHandler} geoClick={this.geocodeClickHandler} searchClick={this.resultOpenedHandler} />
                 </MainContent>
             </div>
 

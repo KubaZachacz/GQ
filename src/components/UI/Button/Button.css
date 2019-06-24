@@ -1,5 +1,10 @@
 .Button {
-  padding: 14px;
+  min-width: 45px;
+  height: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
   margin: 0 2px;
   background-color: rgba(250, 250, 250, 0.6);
   border: 2px solid #2c2c2c;
@@ -11,4 +16,41 @@
   background-color: rgba(255, 255, 255, 0.85);
   box-shadow: 0px 0px 20px -10px rgba(0, 0, 0, 0.65);
   cursor: pointer;
+}
+
+.contrast-button-inverted {
+  background-color: white;
+  color: black;
+}
+
+.contrast-button-yellow {
+  background-color: black !important;
+  color: yellow;
+}
+
+.normal-ctr {
+  color: black;
+  background-color: white !important;
+}
+
+.normal-ctr:hover {
+  background-color: #a7a7a7;
+}
+
+.yellow-ctr {
+  color: #ffd000;
+  background-color: black;
+}
+
+.yellow-ctr:hover {
+  background-color: #1b1b1b;
+}
+
+.white-ctr {
+  color: white;
+  background-color: black;
+}
+
+.white-ctr:hover {
+  background-color: #1b1b1b;
 }

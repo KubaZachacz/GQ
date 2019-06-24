@@ -13,3 +13,7 @@
   background-color: rgba(0, 0, 0, 0.85);
   clip-path: polygon(0 0, 100% 0, 70% 100%, 0 100%);
 }
+
+.MainContent .contrast-mask-black {
+  background-color: #0f0f0f;
+}

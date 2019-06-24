@@ -1,12 +1,25 @@
 .Background {
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
-  min-height: 100vh;
   height: 100vh;
-  height: auto;
   background-color: white;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  z-index: -10;
+}
+
+.pageContent {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  height: auto;
   overflow: auto;
+  z-index: 0;
+}
+
+.contrast-background-white {
+  background-color: black;
 }

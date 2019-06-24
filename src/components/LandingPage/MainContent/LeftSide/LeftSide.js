@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 import Slide from './Slide/Slide'
 import MainInfo from './MainInfo/MainInfo'
@@ -8,14 +8,6 @@ import Result from './Result/Result'
 import './LeftSide.scss';
 
 const LeftSide = (props) => {
-
-  const [loaded, setLoaded] = useState(0);
-
-  useEffect(() => {
-    if (props.actualSite === 1) {
-      // setTimeout(props.resultOpened, 800);
-    }
-  });
 
   let resultStyle = {
     left: `${100 - props.actualSite * 100}%`

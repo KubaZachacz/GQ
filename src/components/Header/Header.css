@@ -11,7 +11,7 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  padding-top: 20px;
+  padding-top: 10px;
 }
 
 .Header .login {
@@ -24,16 +24,28 @@
 
 .Header .logo {
   margin-left: 10%;
-  margin-bottom: 10px;
-  min-width: 120px;
+  margin-bottom: 5px;
+  min-width: 100px;
   z-index: 1;
   transition: width 1s, height 1s;
 }
 
 .Header .accessibility-btns {
   margin-right: 50px;
+  display: flex;
 }
 
-.Header .accessibility-btns .contrast- {
-  color: #818181;
+.Header .accessibility-btns .sizeUp {
+  font-size: 1.4em;
+  font-weight: 700;
+}
+
+.Header .accessibility-btns .sizeDown {
+  font-size: 0.8em;
+  font-weight: 300;
+}
+
+.yellow-ctr {
+  color: #ffd000;
+  background-color: black;
 }

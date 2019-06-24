@@ -1,3 +1,26 @@
+.map-wrap {
+    position: relative;
+    width: auto;
+    height: auto;
+    margin: 10px auto;
+}
+
+.map-res {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 8px;
+    font-size: 1em;
+    background: rgba(255, 255, 255, 0.788);
+    border-radius: 5px;
+    margin: 5px;
+    &:hover {
+        cursor: pointer;
+        background: rgba(201, 201, 201, 0.788);
+    }
+}
+
 .Map {
-    margin: 10px 0;
+    width: 100%;
+    height: 100%;
 }

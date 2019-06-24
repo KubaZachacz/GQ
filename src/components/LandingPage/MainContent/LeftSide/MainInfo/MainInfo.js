@@ -11,7 +11,6 @@ const MainInfo = (props) => {
       <h1>Inteligentna ocena lokalizacji
         pod kątem zwrotu inwestycji
         w&nbsp;odnawialne źródła energii.</h1>
-      <a clas="about-link" href="#o-aplikacji"></a>
       <LinkButton click={props.aboutClick} id={3}>Dowiedz się więcej</LinkButton>
     </div>
   )

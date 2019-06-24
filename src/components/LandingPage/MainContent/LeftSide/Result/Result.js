@@ -17,13 +17,14 @@ const Result = ({ resultData, backClick }) => {
     title = `Powiat ${resultData.nazwa_teryt}`
     result = <>
         <p className="single-result">
-          <i className="fas fa-money-bill-wave"></i> Cena prądu:
-          <span>{resultData.cena_pradu}</span> zł
+          <i className="fas fa-money-bill-wave"></i> Cena  energii elektrycznej:
+          <span>{resultData.cena_pradu}</span> zł/kWh*
         </p>
         <p className="single-result">
           <i className="fas fa-sun"></i> Nasłonecznienie:
-          <span>{resultData.nasłonecznienie}</span> promyczków
+          <span>{resultData.avg_GHI.toFixed(2)}</span> Wh/m2
         </p>
+        <p className="star">*Orientacyjne ceny energii i dystrybucji</p>
         <Link to="/login">Dowiedz się więcej jako zarejestrowany użytkownik</Link>
     </>
     //  const sun = <i class="fas fa-sun"></i>

@@ -11,7 +11,7 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    padding-top: 20px;
+    padding-top: 10px;
   }
 
   .login {
@@ -22,22 +22,23 @@
     display: flex;
   }
   .logo {
-    // width: 55%;
-    // position: absolute;
-    // left: 2.5%;
-    // top: 2%;
-    // min-height: 50px;
     margin-left: 10%;
-    margin-bottom: 10px;
-    min-width: 120px;
+    margin-bottom: 5px;
+    min-width: 100px;
     z-index: 1;
     transition: width 1s, height 1s;
   }
   .accessibility-btns {
     margin-right: 50px;
+    display: flex;
 
-    .contrast- {
-      color: rgb(129, 129, 129);
+    .sizeUp {
+      font-size: 1.4em;
+      font-weight: 700;
+    }
+    .sizeDown {
+      font-size: 0.8em;
+      font-weight: 300;
     }
   }
 }

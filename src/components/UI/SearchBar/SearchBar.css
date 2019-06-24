@@ -19,6 +19,21 @@
   color: rgba(255, 255, 255, 0.699);
 }
 
+.SearchBar input:-webkit-autofill,
+.SearchBar input:-webkit-autofill:hover,
+.SearchBar input:-webkit-autofill:focus,
+.SearchBar textarea:-webkit-autofill,
+.SearchBar textarea:-webkit-autofill:hover,
+.SearchBar textarea:-webkit-autofill:focus,
+.SearchBar select:-webkit-autofill,
+.SearchBar select:-webkit-autofill:hover,
+.SearchBar select:-webkit-autofill:focus {
+  border: 1px solid white;
+  -webkit-text-fill-color: white;
+  -webkit-box-shadow: 0 0 0px 1000px rgba(0, 0, 0, 0.781) inset;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
 .SearchBar button {
   position: absolute;
   top: 50%;

@@ -1,0 +1,28 @@
+.CalcResult {
+  width: 100%;
+  color: white;
+  text-align: center;
+}
+
+.CalcResult p {
+  font-size: 1.2em;
+  margin: 5px 0;
+  font-weight: 500;
+}
+
+.CalcResult span {
+  font-weight: 700;
+}
+
+.CalcResult .inlines {
+  display: flex;
+  justify-content: center;
+}
+
+.CalcResult .inlines a {
+  min-width: 200px;
+  color: white;
+  font-size: 1.4em;
+  padding: 10px;
+  margin: 5px;
+}
