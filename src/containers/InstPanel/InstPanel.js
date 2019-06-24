@@ -38,7 +38,7 @@ class InstPanel extends Component {
         resultText: null,
         powierzchniaUser: '',
         cenaUser: '',
-        isResult: false,
+        isResult: true,
         isCalculated: false,
         marker: null,
         stationMarker: null,
@@ -91,7 +91,7 @@ class InstPanel extends Component {
         const fraze = this.state.searchFraze;
         const map = this.map;
         const latLng = await showAddress(map, fraze);
-        if(latLng) this.displayAddres(latLng);
+        if (latLng) this.displayAddres(latLng);
     }
 
     displayAddres = async (latLng) => {
@@ -99,19 +99,11 @@ class InstPanel extends Component {
         clearMarkers(this.state.marker);
         const marker = addMarker(map, latLng)
         this.latLng = latLng;
-        const text = <PanelBlock>
-            <div className="loader-wrap">
-                <Loader
-                    type="ThreeDots"
-                    color="#f7f8f9"
-                    height="50"
-                    width="50" />
-            </div>
-        </PanelBlock>
         this.setState({
             marker: marker,
-            resultText: text,
-            legendDisplay: true
+            // resultText: text,
+            legendDisplay: true,
+            isResult: false
         })
 
         this.findPowiat()
@@ -136,21 +128,21 @@ class InstPanel extends Component {
 
         axios.get(`http://server184749.nazwa.pl:9007/getdata/powiat?nazwa=${powiat}&lat=${lat}&lon=${lon}`)
             .then(res => {
-                const text = this.formResult(res.data.dane)
+                const text = this.setStationMarker(res.data.dane)
                 let resArr = this.state.result;
-                resArr.push(text);
+                resArr.push(res.data.dane);
                 this.setState({
                     result: resArr,
-                    resultText: resArr,
                     isResult: true,
                 })
 
             })
     }
 
-    formResult = (resultData) => {
+    formResult = (resultData, id) => {
         console.log(resultData)
-        const resultText = <PanelBlock key={this.state.result.length}>
+        const resultText = <PanelBlock key={id}>
+            <button className="delete-btn" onClick={() => { this.removeResult(id) }}><i className="far fa-times-circle"></i></button>
             <h3>Powiat {resultData.nazwa_teryt}</h3>
             <div className="result-set">
                 <p className="single-result">
@@ -183,13 +175,25 @@ class InstPanel extends Component {
 
             </div>
         </PanelBlock>
+        return resultText
+    }
+
+    removeResult = (id) => {
+        const resArr = [...this.state.result];
+        const removed = resArr.splice(id, 1);
+        this.setState({
+            result: resArr
+        })
+
+    }
+
+    setStationMarker = (resultData) => {
         const stationLatLng = { lat: parseFloat(resultData.zapylenie.lat_stacji), lng: parseFloat(resultData.zapylenie.lon_stacji) }
         clearMarkers(this.state.stationMarker);
         const stationMarker = addMarker(this.map, stationLatLng, 'Stacja pomiarowa', blueMarker);
         this.setState({
             stationMarker: stationMarker
         })
-        return resultText
     }
 
     inputTypeHandler = (e) => {
@@ -241,6 +245,20 @@ class InstPanel extends Component {
         // const calcResult = this.state.isCalculated === true ? <PanelBlock><CalcResult pannels={100} price={9000} time={'25 lat'} /></PanelBlock> : null;
         // const calculator = this.state.isResult === true ? <PanelBlock><CalculatorUser powierzchniaChange={this.inputPowierzchniaHandler} cenaChange={this.inputCenaHandler} calcClick={this.calculateClickHandler} /></PanelBlock> : null;
 
+        const loader = !this.state.isResult ? <PanelBlock>
+            <div className="loader-wrap">
+                <Loader
+                    type="ThreeDots"
+                    color="#f7f8f9"
+                    height="50"
+                    width="50" />
+            </div>
+        </PanelBlock> : null
+
+        console.log(this.state.result);
+        const resultOutput = this.state.result.map((value, id) => this.formResult(value, id));
+
+
         return (
             <Background>
                 <div className="UserPanel contentBox">
@@ -254,7 +272,8 @@ class InstPanel extends Component {
                         <SearchBar style={searchStyle} fraze={this.state.searchFraze} typeFraze={this.inputTypeHandler} geoClick={this.geocodeClickHandler} searchClick={this.resultOpenedHandler} />
                         <Map mapStyle={this.state.mapStyle} resizeMap={this.resizeMapHandler} ><Legend display={this.state.legendDisplay} /></Map>
 
-                        {this.state.resultText}
+                        {resultOutput}
+                        {loader}
                         {/* {calculator}
                         {calcResult} */}
                     </div>

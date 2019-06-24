@@ -92,7 +92,7 @@ class App extends Component {
 
   textResizeFn = (size) => {
     const el = document.querySelector("body");
-    const FONT_SCALE = 1.2;
+    const FONT_SCALE = 1.15;
     let n, a = [];
     const walk = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null, false);
     while (n = walk.nextNode()) {

@@ -8,13 +8,18 @@
   transition: left 1s;
   overflow: auto;
   direction: rtl;
+
+a {
+  color: inherit;
+}
+
   .slide-content{
     direction: ltr;
   }
   &::-webkit-scrollbar {
     width: 10px;
     position: absolute;
-    left: 0;
+    right: 0;
     top: 0;
   }
 

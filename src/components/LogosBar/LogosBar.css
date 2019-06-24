@@ -12,10 +12,4 @@
 .LogosBar img {
   margin: 0 20px;
   width: auto;
-  transition: all .4s ease-in-out;
-  cursor: zoom-in;
-}
-
-.LogosBar img:hover {
-  transform: scale(1.8);
 }

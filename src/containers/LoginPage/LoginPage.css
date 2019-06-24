@@ -4,12 +4,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid blue;
 }
 
 .LoginPage .loginWrapper {
   width: 50%;
-  border: 1px solid red;
   padding: 25px;
   margin: 60px 20px;
   background-color: rgba(0, 0, 0, 0.75);
