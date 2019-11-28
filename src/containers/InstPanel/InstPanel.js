@@ -139,6 +139,22 @@ class InstPanel extends Component {
             })
     }
 
+    fakeData = {
+        nazwa_teryt: 'Gdańsk',
+        stan_ludnosci: 100101,
+        cena_pradu: '10,99',
+        zuzycie_energii_na_mieszkanca: 99,
+        ilosc_azbestu: 69,
+        avg_GHI: 50,
+        procent_bezchmurnych_dni: 5,
+        siła_wiatru: 7,
+        kierunek_wiatru: 'WE',
+        zapylenie: {
+            P10: 10,
+            P25: 25,
+        }
+    }
+
     formResult = (resultData, id) => {
         console.log(resultData)
         const resultText = <PanelBlock key={id}>
@@ -256,7 +272,8 @@ class InstPanel extends Component {
         </PanelBlock> : null
 
         console.log(this.state.result);
-        const resultOutput = this.state.result.map((value, id) => this.formResult(value, id));
+        // const resultOutput = this.state.result.map((value, id) => this.formResult(value, id));
+        const resultOutput = this.formResult(this.fakeData, 1);
 
 
         return (
